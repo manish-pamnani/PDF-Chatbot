@@ -115,7 +115,7 @@ router.post('/chat',async (req, res) => {
         queryTexts: [`${req.body.question}`]
     });
 
-    const context = results.documents.join("\n\n");
+    const context = results.documents[0].join("\n\n");
 
     const response = await ollama.chat({
         model: "llama3.2:3b",
@@ -126,7 +126,7 @@ router.post('/chat',async (req, res) => {
             },
             {
                 role: "user",
-                content: `Content:\n${context}\n\nQuestion: ${req.body.question}?`
+                content: `Context:\n${context}\n\nQuestion: ${req.body.question}`
             }
         ]
     })
