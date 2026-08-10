@@ -7,6 +7,7 @@ import { DefaultEmbeddingFunction } from "@chroma-core/default-embed";
 import ollama from "ollama";
 import express from "express";
 import bodyParser from "body-parser";
+import cors from "cors";
 
 // Load a PDF
 async function loadPDFPages(filePath) {
@@ -138,6 +139,7 @@ router.post('/chat',async (req, res) => {
 
 export default router
 
+app.use(cors());
 app.use(bodyParser.json());
 app.use(router);
 
